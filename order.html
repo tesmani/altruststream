@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Page</title>
+
+<style>
+    .plan-options button.active,
+.connections button.active {
+    background: linear-gradient(90deg, #00d2ff, #00ffcc);
+    color: #000;
+    font-weight: 700;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 255, 204, 0.3);
+    border: 2px solid rgba(0, 255, 204, 0.6);
+}
+
+/* hover effect for non-selected */
+.plan-options button:hover,
+.connections button:hover {
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f1720;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logo img {
+    width: 80px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: #1b2430;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.plan-options,
+.connections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.plan-options button,
+.connections button {
+    background: #121a24;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.active {
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    color: #fff;
+}
+
+.summary-box {
+    background: linear-gradient(135deg, #2a1f5c, #2c3e70);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    background: #121a24;
+    color: #fff;
+}
+
+form button {
+    width: 100%;
+    background: linear-gradient(90deg, #00d2ff, #00ffcc);
+    border: none;
+    color: #000;
+    padding: 14px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">
+  <a href="index.html"><img src="image/logo.png"></a>
+</div>
+
+<div class="container">
+
+<div>
+<h2>Order Summary</h2>
+
+<div class="card">
+<div class="plan-options">
+<button data-plan="1month">1 Month</button>
+<button data-plan="3months">3 Months</button>
+<button data-plan="6months">6 Months</button>
+<button data-plan="12months">12 Months</button>
+</div>
+
+<div class="connections">
+<button data-device="1">1</button>
+<button data-device="2">2</button>
+<button data-device="3">3</button>
+<button data-device="4">4</button>
+</div>
+
+<div class="summary-box">
+<h3 id="plan-title"></h3>
+<p class="price" id="plan-price"></p>
+</div>
+</div>
+</div>
+
+<div>
+<h2>Your Details</h2>
+
+<div class="card">
+<form id="orderForm">
+
+<input type="hidden" name="plan" id="form-plan">
+<input type="hidden" name="device" id="form-device">
+<input type="hidden" name="price" id="form-price">
+
+<input type="text" name="name" placeholder="Full name" required>
+<input type="email" name="email" placeholder="Email address" required>
+<input type="text" name="message" placeholder="Optional note">
+
+<button type="submit">Continue to Order</button>
+
+</form>
+</div>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div id="successPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#1b2430; padding:25px; border-radius:12px; text-align:center;">
+<h3>✅ Order Sent</h3>
+<p>We’ll contact you shortly.</p>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+
+let selectedPlan = params.get("plan") || "1month";
+let selectedDevice = params.get("device") || "1";
+
+/* ========= PRICE MATRIX ========= */
+const pricing = {
+"1": { "1month": 21, "3months": 40, "6months": 65, "12months": 95 },
+"2": { "1month": 36, "3months": 72, "6months": 110, "12months": 140 },
+"3": { "1month": 49, "3months": 99, "6months": 150, "12months": 180 },
+"4": { "1month": 64, "3months": 125, "6months": 190, "12months": 260 }
+};
+
+const planMap = {
+"1month": "1 Month",
+"3months": "3 Months",
+"6months": "6 Months",
+"12months": "12 Months"
+};
+
+const title = document.getElementById("plan-title");
+const priceBox = document.getElementById("plan-price");
+
+/* ========= UPDATE UI ========= */
+function updateUI() {
+const price = pricing[selectedDevice][selectedPlan];
+
+// TEXT UPDATE
+title.innerText = `${planMap[selectedPlan]} IPTV Plan • ${selectedDevice} Device`;
+priceBox.innerHTML = `$${price}`;
+
+// FORM VALUES
+document.getElementById("form-plan").value = planMap[selectedPlan];
+document.getElementById("form-device").value = selectedDevice + " Device";
+document.getElementById("form-price").value = "$" + price;
+
+/* ========= FIXED ACTIVE STATES ========= */
+document.querySelectorAll(".plan-options button").forEach(btn => {
+btn.classList.remove("active");
+if (btn.dataset.plan === selectedPlan) {
+btn.classList.add("active");
+}
+});
+
+document.querySelectorAll(".connections button").forEach(btn => {
+btn.classList.remove("active");
+if (btn.dataset.device === selectedDevice) {
+btn.classList.add("active");
+}
+});
+}
+
+/* ========= PLAN CLICK ========= */
+document.querySelectorAll(".plan-options button").forEach(btn => {
+btn.addEventListener("click", () => {
+selectedPlan = btn.dataset.plan;
+updateUI();
+});
+});
+
+/* ========= DEVICE CLICK ========= */
+document.querySelectorAll(".connections button").forEach(btn => {
+btn.addEventListener("click", () => {
+selectedDevice = btn.dataset.device;
+updateUI();
+});
+});
+
+/* ========= INIT ========= */
+updateUI();
+
+/* ========= FORM SUBMIT ========= */
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+e.preventDefault();
+
+const form = this;
+
+fetch("send-order.php", {
+method: "POST",
+body: new FormData(form)
+})
+.then(async res => {
+const text = await res.text();
+console.log("SERVER RESPONSE:", text); // DEBUG
+
+if (text.trim() === "success") {
+document.getElementById("successPopup").style.display = "block";
+form.reset();
+
+setTimeout(() => {
+document.getElementById("successPopup").style.display = "none";
+}, 3000);
+
+} else {
+alert("Mail not sent. Server returned: " + text);
+}
+})
+.catch(err => {
+alert("Network error. PHP not reachable.");
+console.error(err);
+});
+});
+</script>
+</body>
+</html>
