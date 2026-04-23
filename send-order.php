@@ -23,7 +23,7 @@ $price = htmlspecialchars($price);
 $message = htmlspecialchars($message);
 
 // receiver
-$to = "akinloyebasit6@gmail.com";
+$to = "basitakinloye2018@gmail.com";
 
 // subject
 $subject = "New IPTV Order - $plan ($device)";

@@ -8,7 +8,7 @@
 <style>
     .plan-options button.active,
 .connections button.active {
-    background: linear-gradient(90deg, #00d2ff, #00ffcc);
+    background: linear-gradient(90deg, #ff6b35, #ff6b35);
     color: #000;
     font-weight: 700;
     transform: scale(1.05);
@@ -52,7 +52,7 @@ body {
 }
 
 .card {
-    background: #1b2430;
+    background: #2d3a4b;
     padding: 25px;
     border-radius: 12px;
 }
@@ -103,7 +103,7 @@ form input {
 
 form button {
     width: 100%;
-    background: linear-gradient(90deg, #00d2ff, #00ffcc);
+    background: linear-gradient(90deg, #ff6b35, #ff6b35);
     border: none;
     color: #000;
     padding: 14px;
@@ -203,32 +203,25 @@ const priceBox = document.getElementById("plan-price");
 function updateUI() {
 const price = pricing[selectedDevice][selectedPlan];
 
-// TEXT UPDATE
 title.innerText = `${planMap[selectedPlan]} IPTV Plan • ${selectedDevice} Device`;
 priceBox.innerHTML = `$${price}`;
 
-// FORM VALUES
 document.getElementById("form-plan").value = planMap[selectedPlan];
 document.getElementById("form-device").value = selectedDevice + " Device";
 document.getElementById("form-price").value = "$" + price;
 
-/* ========= FIXED ACTIVE STATES ========= */
 document.querySelectorAll(".plan-options button").forEach(btn => {
 btn.classList.remove("active");
-if (btn.dataset.plan === selectedPlan) {
-btn.classList.add("active");
-}
+if (btn.dataset.plan === selectedPlan) btn.classList.add("active");
 });
 
 document.querySelectorAll(".connections button").forEach(btn => {
 btn.classList.remove("active");
-if (btn.dataset.device === selectedDevice) {
-btn.classList.add("active");
-}
+if (btn.dataset.device === selectedDevice) btn.classList.add("active");
 });
 }
 
-/* ========= PLAN CLICK ========= */
+/* ========= CLICK EVENTS ========= */
 document.querySelectorAll(".plan-options button").forEach(btn => {
 btn.addEventListener("click", () => {
 selectedPlan = btn.dataset.plan;
@@ -236,7 +229,6 @@ updateUI();
 });
 });
 
-/* ========= DEVICE CLICK ========= */
 document.querySelectorAll(".connections button").forEach(btn => {
 btn.addEventListener("click", () => {
 selectedDevice = btn.dataset.device;
@@ -244,38 +236,43 @@ updateUI();
 });
 });
 
-/* ========= INIT ========= */
 updateUI();
 
-/* ========= FORM SUBMIT ========= */
+/* ========= FORM SUBMIT (FORMSPREE) ========= */
 document.getElementById("orderForm").addEventListener("submit", function(e) {
 e.preventDefault();
 
 const form = this;
 
-fetch("send-order.php", {
+fetch("https://formspree.io/f/mbdqqjwn", {
 method: "POST",
-body: new FormData(form)
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+name: form.name.value,
+email: form.email.value,
+message: form.message.value,
+plan: document.getElementById("form-plan").value,
+device: document.getElementById("form-device").value,
+price: document.getElementById("form-price").value
 })
-.then(async res => {
-const text = await res.text();
-console.log("SERVER RESPONSE:", text); // DEBUG
-
-if (text.trim() === "success") {
+})
+.then(res => {
+if (res.ok) {
 document.getElementById("successPopup").style.display = "block";
 form.reset();
 
 setTimeout(() => {
 document.getElementById("successPopup").style.display = "none";
 }, 3000);
-
 } else {
-alert("Mail not sent. Server returned: " + text);
+alert("Failed to send order. Try again.");
 }
 })
 .catch(err => {
-alert("Network error. PHP not reachable.");
 console.error(err);
+alert("Network error.");
 });
 });
 </script>

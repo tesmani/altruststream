@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altruist stream</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0f172a;
+  color: #fff;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 10%;
+}
+
+.hero h1 {
+  font-size: 40px;
+  line-height: 1.3;
+}
+
+.hero span {
+  color: #ff6b35;
+}
+
+.hero p {
+  margin-top: 15px;
+  color: #ccc;
+}
+
+.hero img {
+  width: 350px;
+  border-radius: 10px;
+}
+
+/* DESCRIPTION */
+.description {
+  text-align: center;
+  padding: 40px 20%;
+  color: #ccc;
+}
+
+/* PRICING */
+.pricing {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 60px 10%;
+}
+
+.card {
+  background: #111827;
+  padding: 25px;
+  border-radius: 12px;
+  width: 250px;
+  text-align: center;
+  border: 1px solid #1f2937;
+  position: relative;
+  transition: 0.3s;
+}
+
+.card.active {
+  border: 2px solid #ff6b35;
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: #ff6b35;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.card h2 {
+  margin: 10px 0;
+  color: #ff6b35;
+}
+
+.card ul {
+  list-style: none;
+  margin: 20px 0;
+  color: #bbb;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+/* BUTTON */
+.contact-btn {
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.contact-btn:hover {
+  background: #ff6b35;
+  color: #fff;
+}
+</style>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>
+      Launch Your <span>SMART 4K</span><br />
+      Broadcasting Empire
+    </h1>
+    <p>
+      Partner with the industry leader. Provision premium, buffer-free
+      entertainment with our powerful reseller platform.
+    </p>
+  </div>
+
+  <div class="hero-image">
+    <img src="image/11.png" alt="IPTV Dashboard" />
+  </div>
+</section>
+
+<!-- DESCRIPTION -->
+<section class="description" style="background-color: #693825; color: white;">
+  <p>
+    Altrust Stream delivers expertly crafted SMART 4K wholesale packages built for scalability and high-profit potential. Provide a superior viewing experience while retaining full administrative control. Our advanced centralized platform enables you to manage subscriptions, create sub-reseller networks, and expand your digital distribution with confidence. Take your position in the streaming industry with powerful, reliable backend infrastructure.
+  </p>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+
+  <div class="card">
+    <h3>120 Credits</h3>
+    <h2>$400.00</h2>
+    <ul>
+      <li>Admin Panel</li>
+      <li>Dealer Training</li>
+      <li>Client Management</li>
+      <li>24/7 Support</li>
+    </ul>
+    <button class="contact-btn">CONTACT US</button>
+  </div>
+
+  <div class="card active">
+    <span class="badge">BEST SELL</span>
+    <h3>240 Credits</h3>
+    <h2>$700.00</h2>
+    <ul>
+      <li>Admin Panel</li>
+      <li>Dealer Training</li>
+      <li>Client Management</li>
+      <li>24/7 Support</li>
+    </ul>
+    <button class="contact-btn">CONTACT US</button>
+  </div>
+
+  <div class="card">
+    <h3>500 Credits</h3>
+    <h2>$1050.00</h2>
+    <ul>
+      <li>Admin Panel</li>
+      <li>Dealer Training</li>
+      <li>Client Management</li>
+      <li>24/7 Support</li>
+    </ul>
+    <button class="contact-btn">CONTACT US</button>
+  </div>
+
+</section>
+
+<section class="faq-section">
+  <div class="faq-container">
+    <h2 style="color: #ff6b35;">Reseller FAQ</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What is the Smart4K Reseller Program?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Our reseller program allows you to sell premium IPTV subscriptions under your own brand using our powerful backend system and infrastructure.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Do I need technical experience to start?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          No. Our platform is beginner-friendly and includes full training, automation tools, and a simple dashboard to manage clients and subscriptions.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How do I earn profit as a reseller?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          You purchase credits at wholesale rates and resell subscriptions at your own pricing, keeping full control over your profit margins.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        What devices are supported?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Our IPTV service works on Smart TVs, Android, iOS, Firestick, MAG, and popular IPTV apps like IPTV Smarters and TiviMate.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Is there customer support available?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. We provide 24/7 priority support to all resellers, ensuring you can assist your clients at any time without delays.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Can I create sub-resellers?
+        <span>+</span>
+      </button>
+      <div class="faq-answer">
+        <p>
+          Yes. Our platform allows you to expand your business by creating and managing sub-resellers under your network.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+    .faq-section {
+  background: #0b1220;
+  padding: 60px 10%;
+  color: #fff;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.faq-container h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 32px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #1f2937;
+  margin-bottom: 10px;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  text-align: left;
+  font-size: 18px;
+  padding: 18px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question span {
+  font-size: 22px;
+  color: #ff6b35;
+  transition: 0.3s;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer p {
+  padding: 10px 0 20px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Active */
+.faq-item.active .faq-answer {
+  max-height: 200px;
+}
+
+.faq-item.active .faq-question span {
+  transform: rotate(45deg);
+}
+</style>
+
+<script>
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+  const button = item.querySelector(".faq-question");
+
+  button.addEventListener("click", () => {
+    item.classList.toggle("active");
+
+    // Optional: close others
+    faqItems.forEach(other => {
+      if (other !== item) {
+        other.classList.remove("active");
+      }
+    });
+  });
+});
+
+    const buttons = document.querySelectorAll(".contact-btn");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const telegramLink = "https://t.me/IPTVbest2";
+    window.open(telegramLink, "_blank");
+  });
+});
+
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+      entry.target.style.transition = `all 0.6s ease ${index * 0.15}s`;
+    }
+  });
+}, { threshold: 0.2 });
+
+cards.forEach(card => {
+  card.style.opacity = "0";
+  card.style.transform = "translateY(40px)";
+  observer.observe(card);
+});
+</script>
+</body>
+</html>
